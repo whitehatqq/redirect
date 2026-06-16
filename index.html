@@ -8,11 +8,24 @@
       const target = new URLSearchParams(location.search).get('url')
 
       if (target) {
-        location.replace(target)
+        try {
+          const url = new URL(target)
+          const hostname = url.hostname.toLowerCase()
+
+          const isAllowedProtocol = url.protocol === 'https:' || url.protocol === 'http:'
+          const isAllowedDomain = hostname.includes('vpnon')
+
+          if (isAllowedProtocol && isAllowedDomain) {
+            location.replace(url.href)
+          }
+        } catch (e) {
+          console.error('Invalid URL')
+        }
       }
     </script>
   </head>
+
   <body>
-    <p>Redirecting...</p>
+    <p>Invalid redirect</p>
   </body>
 </html>

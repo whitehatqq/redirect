@@ -5,27 +5,29 @@
     <title>Redirect</title>
 
     <script>
-      const target = new URLSearchParams(location.search).get('url')
+      const repoName = 'redirect'
 
-      if (target) {
-        try {
-          const url = new URL(target)
-          const hostname = url.hostname.toLowerCase()
-
-          const isAllowedProtocol = url.protocol === 'https:' || url.protocol === 'http:'
-          const isAllowedDomain = hostname.includes('vpnon')
-
-          if (isAllowedProtocol && isAllowedDomain) {
-            location.replace(url.href)
-          }
-        } catch (e) {
-          console.error('Invalid URL')
-        }
+      const redirects = {
+        nic_17_06_26: 'https://vpnon.ru/ru/home?source=nic_17_06_26#widget_main',
+        site: 'https://vpnon.io',
       }
+
+      const params = new URLSearchParams(location.search)
+
+      let parts = location.pathname.split('/').filter(Boolean)
+
+      if (parts[0] === repoName) {
+        parts.shift()
+      }
+
+      const code = parts[0] || params.get('code') || ''
+      const target = redirects[code] || 'https://google.com'
+
+      location.replace(target)
     </script>
   </head>
 
   <body>
-    <p>Invalid redirect</p>
+    <p>Redirecting...</p>
   </body>
 </html>

@@ -5,21 +5,15 @@
     <title>Redirect</title>
 
     <script>
-      const repoName = 'redirect'
-
       const redirects = {
-        nic_16_06: 'https://vpnon.ru/ru/home?source=nic_17_06_26#widget_main',
+        nic_17_06_26: 'https://whitehatqq.github.io/redirect/nic_17_06_26',
         sdkflkdlf: 'https://google.com',
       }
 
-      let parts = location.pathname.split('/').filter(Boolean)
+      const params = new URLSearchParams(location.search)
+      const to = params.get('to')
 
-      if (parts[0] === repoName) {
-        parts.shift()
-      }
-
-      const code = parts[0]
-      const target = redirects[code] || 'https://google.com'
+      const target = redirects[to] || 'https://google.com'
 
       location.replace(target)
     </script>

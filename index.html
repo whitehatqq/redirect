@@ -8,11 +8,9 @@
       const repoName = 'redirect'
 
       const redirects = {
-        nic_17_06_26: 'https://vpnon.ru/ru/home?source=nic_17_06_26#widget_main',
-        site: 'https://vpnon.io',
+        nic_16_06: 'https://vpnon.ru/ru/home?source=nic_17_06_26#widget_main',
+        sdkflkdlf: 'https://google.com',
       }
-
-      const params = new URLSearchParams(location.search)
 
       let parts = location.pathname.split('/').filter(Boolean)
 
@@ -20,7 +18,7 @@
         parts.shift()
       }
 
-      const code = parts[0] || params.get('code') || ''
+      const code = parts[0]
       const target = redirects[code] || 'https://google.com'
 
       location.replace(target)
